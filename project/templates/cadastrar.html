@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de cadastro</title>
+    <style>
+
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background: url('Foto_de_fundo_geral\ -\ Copia.jpg') no-repeat center center/cover;
+            height: 100vh;
+    
+            /* exclui a linha de subrir e descer*/
+            overflow: hidden; 
+        }
+        .tela-de-cadastro{
+            background-color: rgba(217, 217, 217,0.9);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            opacity: 0.6;  
+            transform: translate(-50%, -50%);
+            border-radius: 10%;
+            padding: 50px;
+
+        }
+        button{
+            background-color: rgba(187, 139, 103,0.8);
+            border: none;
+            padding: 6px;
+            width: 67%;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        button:hover
+        {
+            background-color: rgba(187, 139, 103,0.6);
+        }
+        input{
+            padding: 5px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            border-radius: 10px;
+        }
+    </style>
+    </head>
+        <body>
+    <div class="tela-de-cadastro">
+      
+        <h5>Realize o cadastro para acessar os serviços</h5>
+        <h1>Cadastro</h1>
+        <input type="text" placeholder="Digite seu nome" autocomplete="additional-name" id="Name" required>
+        <br><br>
+        <input type="tel" placeholder="Contato" autocomplete="tel" id="tel" required>
+        <br><br>
+        <input type="date" placeholder="Data de Nascimento" autocomplete="bday-day" id="Data-de-Nascimento" required>
+        <br><br>
+        <button>cadastro</button>
+        
+    </div>
+    
+</body>
+</html>

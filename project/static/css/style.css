@@ -1,0 +1,45 @@
+:root{
+    --cor-da-letra:rgb(240,248,255);
+}
+
+body {
+    background-image: url(Foto_de_fundo_geral\ -\ Copia.jpg);
+    background-repeat: no-repeat;
+    opacity: 40;
+    color: var(--cor-da-letra);
+    width: auto;
+    height: auto;
+    margin: auto;
+    text-align: center;
+    padding: auto;
+}
+
+footer {
+    text-align: center;
+    font-style: italic;
+}
+
+.text{
+    color: var(--cor-da-letra);
+    text-align: center;
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.botao{
+    background-color: #2196F3;
+    border: none;
+    color: #fff;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.5s ease;
+}
+
+.op{
+    list-style-type: none;
+}

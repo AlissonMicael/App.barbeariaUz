@@ -1,0 +1,16 @@
+:root{
+    --cor-da-letra: rgb(240,248,255);
+}
+
+body {
+    background-image: url(Foto_de_fundo_geral\ -\ Copia.jpg);
+    opacity: 40;
+    color: var(--cor-da-letra);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    width: auto;
+    height: auto;
+    margin: auto;
+    text-align: center;
+    padding: auto;
+}
