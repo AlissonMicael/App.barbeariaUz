@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Agendamentos</title>
+    <style>
+        /* style_agendamentos.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+header a {
+    color: #ff9900;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+header a:hover {
+    background-color: #ff9900;
+    color: white;
+}
+
+.agendamentos {
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+p {
+    font-size: 1.2em;
+    text-align: center;
+    color: #555;
+}
+
+    </style>
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/style_agendamentos.css') }}">-->
+</head>
+<body>
+    <header>
+        <h1>Meus Agendamentos</h1>
+        <a href="{{ url_for('cabelo.agendar_cabelo') }}">Novo Agendamento</a>
+    </header>
+
+    <section class="agendamentos">
+        {% if agendamentos %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Tipo de Corte</th>
+                        <th>Horário</th>
+                        <th>Forma de Pagamento</th>
+                        <th>Profissional</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for agendamento in agendamentos %}
+                        <tr>
+                            <td>{{ agendamento.data }}</td>
+                            <td>{{ agendamento.tipo_cabelo }}</td>
+                            <td>{{ agendamento.horario }}</td>
+                            <td>{{ agendamento.forma_pagamento }}</td>
+                            <td>{{ agendamento.profissional }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Você ainda não tem agendamentos.</p>
+        {% endif %}
+    </section>
+</body>
+</html>

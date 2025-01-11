@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from flask import render_template, redirect, url_for, flash
 from wtforms import StringField, PasswordField, SubmitField, DateField, SelectField
 from wtforms.validators import DataRequired, EqualTo, Length, ValidationError, InputRequired
-from project.models import usuario
+from project.models import usuario, Agendamento
 from project import db
 from project import app
 

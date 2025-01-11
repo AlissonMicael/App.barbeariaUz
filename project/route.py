@@ -2,12 +2,12 @@
 #Home
 #-----#
 from flask_wtf import FlaskForm
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request, session
 from wtforms import StringField, PasswordField, SubmitField, DateField
 from wtforms.validators import DataRequired, EqualTo, Length, ValidationError, InputRequired
 
 from . import db
-from .models import usuario
+from .models import usuario, Agendamento
 
 from flask import Blueprint, render_template
 from project.models import db
@@ -39,11 +39,11 @@ def login():
         # Verificar credenciais
         usuario_existente = usuario.query.filter_by(nome=nome, telefone=telefone).first()
         if usuario_existente:
+            session["usuario"] = nome
             flash("Login realizado com sucesso!", "success")
             return redirect('/')  # Redireciona para uma página principal
         else:
-            flash("Credenciais inválidas. Tente novamente.", "error")
-
+            flash("Credenciais inválidas. Tente novamente.", "error")    
     return render_template("login.html", form=formLogin)
 #-----#
 #cadastro
@@ -83,50 +83,42 @@ from flask import Blueprint, render_template
 
 cabelo_route = Blueprint('cabelo', __name__)
 
-@cabelo_route.route('/', methods=['GET', 'POST'])
-class Agendado(db.Model):
-    __tablename__ = 'agendado'
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
-    corte = db.Column(db.String(50), nullable=False)
-    horario = db.Column(db.String(100), nullable=False)
-    dt = db.Column(db.String(100), nullable=False)
-    preco = db.Column(db.String(100), nullable=False)
-
-    usuario = db.relationship('Usuario', backref='agendamentos')  # Relacionamento com o modelo Usuario
-
-    def __repr__(self):
-        return f'<Corte {self.corte}>'
-
 # Rota de agendamento
 @cabelo_route.route('/', methods=['GET', 'POST'])
-def agendamento():
-    form = AgendamentoForm()  # Instancia o formulário
-    if form.validate_on_submit():  # Verifica se o formulário foi submetido e é válido
-        # Coletando dados do formulário
-        data = form.data.data
-        corte = form.tipo_cabelo.data
-        horario = form.horario_cabelo.data
-        preco = form.forma_pagamento.data
-        usuario_id = form.usuario_id.data  # Supondo que o usuário esteja autenticado e tenha um ID
-        
-        # Criando um novo agendamento no banco de dados
-        novo_agendamento = Agendado(
-            id_usuario=usuario_id,
-            corte=corte,
-            horario=horario,
-            dt=data,
-            preco=preco
-        )
+def agendar_cabelo():
+    if "usuario" not in session:
+        flash("Por favor, faça login para agendar.", "warning")
+        return redirect('/')  # Redireciona para a página de login
 
-        # Salvando no banco de dados
+    if request.method == "POST":
+        # Obter dados do formulário
+        nome_cliente = session["usuario"]  # Nome do cliente logado
+        data = request.form.get("data")
+        tipo_cabelo = request.form.get("tipo_cabelo")
+        horario = request.form.get("horario_cabelo")
+        forma_pagamento = request.form.get("forma_pagamento")
+        profissional = request.form.get("profissional")
+
+        # Criar uma nova entrada no banco de dados
+        novo_agendamento = Agendamento(
+            nome_cliente=nome_cliente,
+            data=data,
+            tipo_cabelo=tipo_cabelo,
+            horario=horario,
+            forma_pagamento=forma_pagamento,
+            profissional=profissional
+        )
         db.session.add(novo_agendamento)
         db.session.commit()
 
-        # Mensagem de sucesso
-        flash('Agendamento realizado com sucesso!', 'success')
-        return redirect(url_for('sucesso'))
+        flash("Agendamento realizado com sucesso!", "success")
+        return redirect('/')
+    
+    return render_template("cabelo.html")
+
+
+
+
 
 #-----#
 #Barba
@@ -137,8 +129,36 @@ from flask import Blueprint, render_template
 barba_route = Blueprint('barba', __name__)
 
 @barba_route.route('/')
-def mostra_barba():
-    return render_template('barba.html')
+def agendar_barba():
+    if "usuario" not in session:
+        flash("Por favor, faça login para agendar.", "warning")
+        return redirect('/')  # Redireciona para a página de login
+
+    if request.method == "POST":
+        # Obter dados do formulário
+        nome_cliente = session["usuario"]  # Nome do cliente logado
+        data = request.form.get("data")
+        tipo_cabelo = request.form.get("tipo_cabelo")
+        horario = request.form.get("horario_cabelo")
+        forma_pagamento = request.form.get("forma_pagamento")
+        profissional = request.form.get("profissional")
+
+        # Criar uma nova entrada no banco de dados
+        novo_agendamento = Agendamento(
+            nome_cliente=nome_cliente,
+            data=data,
+            tipo_cabelo=tipo_cabelo,
+            horario=horario,
+            forma_pagamento=forma_pagamento,
+            profissional=profissional
+        )
+        db.session.add(novo_agendamento)
+        db.session.commit()
+
+        flash("Agendamento realizado com sucesso!", "success")
+        return redirect('/')
+    
+    return render_template("barba.html")
 
 #-----#
 #Combo
@@ -149,9 +169,36 @@ from flask import Blueprint, render_template
 combo_route = Blueprint('combo', __name__)
 
 @combo_route.route('/')
-def mostra_combo():
-    return render_template('combo.html')
+def agendar_combo():
+    if "usuario" not in session:
+        flash("Por favor, faça login para agendar.", "warning")
+        return redirect('/')  # Redireciona para a página de login
 
+    if request.method == "POST":
+        # Obter dados do formulário
+        nome_cliente = session["usuario"]  # Nome do cliente logado
+        data = request.form.get("data")
+        tipo_cabelo = request.form.get("tipo_cabelo")
+        horario = request.form.get("horario_cabelo")
+        forma_pagamento = request.form.get("forma_pagamento")
+        profissional = request.form.get("profissional")
+
+        # Criar uma nova entrada no banco de dados
+        novo_agendamento = Agendamento(
+            nome_cliente=nome_cliente,
+            data=data,
+            tipo_cabelo=tipo_cabelo,
+            horario=horario,
+            forma_pagamento=forma_pagamento,
+            profissional=profissional
+        )
+        db.session.add(novo_agendamento)
+        db.session.commit()
+
+        flash("Agendamento realizado com sucesso!", "success")
+        return redirect('/')
+    
+    return render_template("combo.html")
 #-----#
 #tela barb
 #-----#
@@ -164,3 +211,14 @@ barbeiro_route = Blueprint('barbeiro', __name__)
 def mostra_barbeiro():
     return render_template('tela_barbeiro.html')
 
+@cabelo_route.route('/agendamentos/', methods=['GET'])
+def exibir_agendamentos():
+    if "usuario" not in session:
+        flash("Por favor, faça login para visualizar seus agendamentos.", "warning")
+        return redirect('/')  # Redireciona para a página de login
+
+    # Obter os agendamentos do usuário logado
+    nome_cliente = session["usuario"]
+    agendamentos = Agendamento.query.filter_by(nome_cliente=nome_cliente).all()
+
+    return render_template("agendamentos.html", agendamentos=agendamentos)

@@ -8,36 +8,51 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_cabelo.css') }}">
 </head>
 <body>
-    <form method="POST">
-        {{ form.hidden_tag() }}  <!-- Campo CSRF -->
-        
+    <form method="POST" action="{{ url_for('cabelo.agendar_cabelo') }}">
         <!-- Data -->
         <h3>Data de Agendamento</h3>
-        {{ form.data(class="form-control") }}  <!-- Renderiza o campo de data -->
+        <input type="date" name="data" id="data" required>
         
         <!-- Cabelo -->
         <h3>Cabelos:</h3>
-        {{ form.tipo_cabelo(class="form-control") }}  <!-- Renderiza o campo de seleção de cabelo -->
+        <select name="tipo_cabelo" required>
+            <option value="degrade">Degrade</option>
+            <option value="social">Social</option>
+            <option value="mullet">Mullet</option>
+            <option value="navalhado">Navalhado</option>
+            <option value="militar">Militar</option>
+            <option value="careca">Careca</option>
+        </select>
         
         <!-- Horário -->
-        <h3>Horário:</h3>
-        {{ form.horario_cabelo(class="form-control") }}  <!-- Renderiza o campo de seleção de horário -->
+        <h3>Horario:</h3>
+        <select name="horario_cabelo" required>
+            <option value="7a12">7h as 12h</option>
+            <option value="13a18">13h as 20h</option>
+        </select>
         
         <!-- Forma de pagamento -->
         <h3>Forma de pagamento:</h3>
-        {{ form.forma_pagamento(class="form-control") }}  <!-- Renderiza o campo de seleção de pagamento -->
+        <select name="forma_pagamento" required>
+            <option value="pix">Pix</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="cartao_credito">Cartão de Credito</option>
+            <option value="cartao_debito">Cartão de Debito</option>
+        </select>
         
         <!-- Profissional -->
         <h3>Profissional:</h3>
-        {{ form.profissional(class="form-control") }}  <!-- Renderiza o campo de seleção de profissional -->
+        <select name="profissional" required>
+            <option value="alisson">Alisson</option>
+            <option value="hudson">Hudson</option>
+            <option value="gustavo">Gustavo</option>
+            <option value="joao">João Gabriel</option>
+        </select>
         
-        <!-- Botão de envio -->
+        <!-- Botão -->
         <div id="butao">
-            {{ form.submit(class="btn btn-primary") }}  <!-- Renderiza o botão de envio -->
+            <button type="submit" name="cent">Agendar</button>
         </div>
     </form>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='js/cru.js') }}"></script>  <!-- Seu JS customizado -->
 </body>
 </html>

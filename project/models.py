@@ -15,23 +15,17 @@ class usuario(db.Model):
     def __repr__(self):
         return f'<Usuario {self.Nome}>'
 
-class Agendado(db.Model):
-    __tablename__ = 'agendado'
-    __table_args__ = {'extend_existing': True}
-    
+class Agendamento(db.Model):
+    __tablename__ = 'agendamento'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
-    corte = db.Column(db.String(50), nullable=False)
-    horario = db.Column(db.String(100), nullable=False)
-    dt = db.Column(db.String(100), nullable=False)
-    preco = db.Column(db.String(100), nullable=False)
-
-    usuario = db.relationship('Usuario', backref='agendamentos')  # Relacionamento com o modelo Usuario
-
-    # Adicionando o extend_existing
-    __table_args__ = {'extend_existing': True}
+    nome_cliente = db.Column(db.String(100), nullable=False)  # Nome do cliente logado
+    data = db.Column(db.String(10), nullable=False)
+    tipo_cabelo = db.Column(db.String(50), nullable=False)
+    horario = db.Column(db.String(50), nullable=False)
+    forma_pagamento = db.Column(db.String(50), nullable=False)
+    profissional = db.Column(db.String(50), nullable=False)
 
     def __repr__(self):
-        return f'<Corte {self.corte}>'
+        return f'<Agendamento {self.tipo_cabelo} - {self.data}>'
 
 

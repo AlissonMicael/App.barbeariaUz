@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.secret_key = "comida"
 
 # Configuração da URL de conexão com o banco de dados
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:22111511@localhost/uzcaba'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:22111511@localhost/uzcabas'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)

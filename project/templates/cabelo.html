@@ -7,47 +7,51 @@
     <title>Cabelos</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_cabelo.css') }}">
 </head>
-    <!--Conteúdo-->
 <body>
-    <!--Data-->
-    <h3>Data de Agendamento</h3>
-    <input type="date" name="data" id="data">
-    <!--Cabelo-->
-    <h3>Cabelos:</h3>
-    <select name="tipo_cabelo">
-        <option value="degrade">Degrade</option>
-        <option value="social">Social</option>
-        <option value="mullet">Mullet</option>
-        <option value="navalhado">Navalhado</option>
-        <option value="militar">Militar</option>
-    </select>
-    <!--Horario-->
-    <h3>Horario:</h3>
-    <select name="horario_cabelo">
-        <option value="7a12">7h as 12h</option>
-        <option value="13a18">13h as 20h</option>
-    </select>
-    <!--Forma de pagamento-->
-    <h3>Forma de pagamento:</h3>
-    <select name="forma_pagamento">
-        <option value="pix">Pix</option>
-        <option value="dinheiro">Dinheiro</option>
-        <option value="cartao_credito">Cartão de Credito</option>
-        <option value="cartao_debito">Cartão de Debito</option>
-    </select>
-    <!--Profissional-->
-    <h3>Profissional:</h3>
-    <select name="profissional">
-        <option value="alisson">Alisson</option>
-        <option value="hudson">Hudson</option>
-        <option value="gustavo">Gustavo</option>
-        <option value="joao">João Gabriel</option>
-    </select>
-    <!--butão-->
-    <div id="butao">
-        <button name="cent">Agendar</button>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='js/cru.js') }}"></script>
+    <form method="POST" action="{{ url_for('cabelo.agendar_cabelo') }}">
+        <!-- Data -->
+        <h3>Data de Agendamento</h3>
+        <input type="date" name="data" id="data" required>
+        
+        <!-- Cabelo -->
+        <h3>Cabelos:</h3>
+        <select name="tipo_cabelo" required>
+            <option value="degrade">Degrade</option>
+            <option value="social">Social</option>
+            <option value="mullet">Mullet</option>
+            <option value="navalhado">Navalhado</option>
+            <option value="militar">Militar</option>
+        </select>
+        
+        <!-- Horário -->
+        <h3>Horario:</h3>
+        <select name="horario_cabelo" required>
+            <option value="7a12">7h as 12h</option>
+            <option value="13a18">13h as 20h</option>
+        </select>
+        
+        <!-- Forma de pagamento -->
+        <h3>Forma de pagamento:</h3>
+        <select name="forma_pagamento" required>
+            <option value="pix">Pix</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="cartao_credito">Cartão de Credito</option>
+            <option value="cartao_debito">Cartão de Debito</option>
+        </select>
+        
+        <!-- Profissional -->
+        <h3>Profissional:</h3>
+        <select name="profissional" required>
+            <option value="alisson">Alisson</option>
+            <option value="hudson">Hudson</option>
+            <option value="gustavo">Gustavo</option>
+            <option value="joao">João Gabriel</option>
+        </select>
+        
+        <!-- Botão -->
+        <div id="butao">
+            <button type="submit" name="cent">Agendar</button>
+        </div>
+    </form>
 </body>
 </html>
