@@ -1,67 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de cadastro</title>
+    <title>Tela de Cadastro</title>
     <style>
-
-        body{
+        body {
             font-family: Arial, Helvetica, sans-serif;
-            background: url('Foto_de_fundo_geral\ -\ Copia.jpg') no-repeat center center/cover;
+            background-image: url(Foto_de_fundo_geral\ -\ Copia.jpg);
+            background-repeat: no-repeat;
             height: 100vh;
-    
-            /* exclui a linha de subrir e descer*/
+            /* Exclui a linha de subir e descer */
             overflow: hidden; 
         }
-        .tela-de-cadastro{
-            background-color: rgba(217, 217, 217,0.9);
+        .tela-de-cadastro {
+            background-color: rgba(217, 217, 217, 0.9);
             position: absolute;
             top: 50%;
             left: 50%;
-            opacity: 0.6;  
+            opacity: 0.6;
             transform: translate(-50%, -50%);
             border-radius: 10%;
             padding: 50px;
-
+            width: 350px; /* Largura do formulário */
+            box-sizing: border-box;
         }
-        button{
-            background-color: rgba(187, 139, 103,0.8);
+        button {
+            background-color: rgba(187, 139, 103, 0.8);
             border: none;
-            padding: 6px;
-            width: 67%;
+            padding: 10px;
+            width: 100%; /* Ocupa toda a largura do formulário */
             border-radius: 10px;
-            font-size: 15px;
+            font-size: 16px;
             cursor: pointer;
         }
-        button:hover
-        {
-            background-color: rgba(187, 139, 103,0.6);
+        button:hover {
+            background-color: rgba(187, 139, 103, 0.6);
         }
-        input{
-            padding: 5px;
+        input {
+            padding: 10px;
             border: none;
             outline: none;
             font-size: 15px;
             border-radius: 10px;
+            width: 100%; /* Ocupa toda a largura do formulário */
+            margin-bottom: 15px; /* Espaçamento entre os campos */
         }
     </style>
-    </head>
-        <body>
+</head>
+<body>
     <div class="tela-de-cadastro">
-      
-        <h5>Realize o cadastro para acessar os serviços</h5>
-        <h1>Cadastro</h1>
-        <input type="text" placeholder="Digite seu nome" autocomplete="additional-name" id="Name" required>
-        <br><br>
-        <input type="tel" placeholder="Contato" autocomplete="tel" id="tel" required>
-        <br><br>
-        <input type="date" placeholder="Data de Nascimento" autocomplete="bday-day" id="Data-de-Nascimento" required>
-        <br><br>
-        <button>cadastro</button>
-        
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div>
+                <label for="nome">{{ form.nome.label }}</label>
+                {{ form.nome(size=32) }}
+            </div><br>
+            <div>
+                <label for="telefone">{{ form.telefone.label }}</label>
+                {{ form.telefone(size=32) }}
+            </div><br>
+            <div>
+                <label for="data_nascimento">{{ form.data_nascimento.label }}</label>
+                {{ form.data_nascimento() }}
+            </div><br>
+            <div>
+                {{ form.botao_confirmar() }}
+            </div>
+        </form>
     </div>
-    
 </body>
 </html>

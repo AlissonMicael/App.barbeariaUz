@@ -1,7 +1,7 @@
 # Criar os formulários do site
 from flask_wtf import FlaskForm
 from flask import render_template, redirect, url_for, flash
-from wtforms import StringField, PasswordField, SubmitField, DateField
+from wtforms import StringField, PasswordField, SubmitField, DateField, SelectField
 from wtforms.validators import DataRequired, EqualTo, Length, ValidationError, InputRequired
 from project.models import usuario
 from project import db
@@ -10,15 +10,29 @@ from project import app
 class FormCadastrar(FlaskForm):
     nome = StringField('Digite seu nome:', validators=[DataRequired(), Length(2, 50)])
     telefone = StringField('Telefone:', validators=[DataRequired(), Length(10, 15)])
-    data = DateField('Data de Nascimento:', format='%Y-%m-%d', validators=[DataRequired()])
-    botao_confirmar = SubmitField('Cadastr')
+    data_nascimento = DateField('Data de Nascimento:', format='%Y-%m-%d', validators=[DataRequired()])
+    botao_confirmar = SubmitField('Cadastrar')
 
 class FormLogin(FlaskForm):
     nome = StringField('Digite seu nome:', validators=[DataRequired(), Length(2, 50)])
     telefone = StringField('Telefone:', validators=[DataRequired(), Length(10, 15)])
     botao_entrar = SubmitField('Entrar')
 
-@app.route("/cadastrar", methods=['GET','POST'])
+
+class AgendamentoForm(FlaskForm):
+    usuario_id = StringField('ID do Usuário', validators=[DataRequired()])
+    tipo_cabelo = SelectField('Tipo de Corte', choices=[('degrade', 'Degrade'), ('social', 'Social'), 
+                                                        ('mullet', 'Mullet'), ('navalhado', 'Navalhado'),
+                                                        ('militar', 'Militar')], validators=[DataRequired()])
+    horario_cabelo = SelectField('Horário', choices=[('7a12', '7h as 12h'), ('13a18', '13h as 20h')], 
+                                 validators=[DataRequired()])
+    forma_pagamento = SelectField('Forma de Pagamento', choices=[('pix', 'Pix'), ('dinheiro', 'Dinheiro'),
+                                                                 ('cartao_credito', 'Cartão de Crédito'),
+                                                                 ('cartao_debito', 'Cartão de Débito')],
+                                 validators=[DataRequired()])
+    data = DateField('Data de Agendamento', validators=[DataRequired()])
+    submit = SubmitField('Agendar')
+'''@app.route("/cadastrar", methods=['GET','POST'])
 def cadastro():
     formCadastrar = FormCadastrar
     if formCadastrar.validate_on_submit():
@@ -48,4 +62,4 @@ def login():
             flash("Credenciais invalidas. Tente novamente.", "error")
 
         return render_template("login.html", form=formlogin)            
-        #tem q colocar as telas de login e cadastro para poder funcionar
+        #tem q colocar as telas de login e cadastro para poder funcionar'''

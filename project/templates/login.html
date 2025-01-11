@@ -1,67 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de login</title>
+    <title>Tela de Login</title>
     <style>
-        body{
-            background-image: url(foto.jpg);
+        body {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 15px;
+            background-image: url('Foto_de_fundo_geral - Copia.jpg');
+            background-repeat: no-repeat;
+            background-size: cover; /* Garante que a imagem cubra a tela */
+            height: 100vh;
+            margin: 0; /* Remove o espaço externo */
+            overflow: hidden; /* Exclui a linha de rolagem */
         }
-        div{
-            background-color: rgba(217, 217, 217,0.9);
+
+        .login-container {
+            background-color: rgba(217, 217, 217, 0.9);
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
-            padding: 40px;
-            border-radius: 15px;
-            width: 300px;
-            text-align: center;
+            transform: translate(-50%, -50%);
+            opacity: 0.9; /* Aumentei a opacidade para melhor visibilidade */
+            border-radius: 10px;
+            padding: 50px;
+            width: 350px; /* Largura do formulário */
+            box-sizing: border-box;
+            text-align: center; /* Centraliza o conteúdo */
         }
-        input{
-            padding: 5px;
-            border: none;
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
             outline: none;
             font-size: 15px;
             border-radius: 10px;
+            width: 100%;
+            margin-bottom: 15px; /* Espaçamento entre os campos */
+            box-sizing: border-box;
         }
-        button{
-            background-color: rgba(187, 139, 103,0.8);
+
+        button {
+            background-color: rgba(187, 139, 103, 0.8);
             border: none;
-            padding: 6px;
-            width: 67%;
+            padding: 10px;
+            width: 100%; /* Ocupa toda a largura do formulário */
             border-radius: 10px;
-            font-size: 15px;
+            font-size: 16px;
             cursor: pointer;
         }
-        button:hover{
-            background-color: rgba(187, 139, 103,0.6);
 
+        button:hover {
+            background-color: rgba(187, 139, 103, 0.6);
         }
-        .nome_caixa{
+
+        .link {
+            margin-top: 20px;
+        }
+
+        .link a {
+            text-decoration: none;
+            color: rgba(187, 139, 103, 1);
             font-size: 14px;
-            align-items: center;
-        }
-        .contato{
-            text-align: left;
         }
     </style>
-    <link rel="stylesheet"  href="style.css">
 </head>
 <body>
-    <div>
-        <h1 class="nome_caixa">Realize seu login para acessar os serviços</h1>
-        <h2 class="nome_login">Login</h2>
-        <input type="text" placeholder="Digite seu nome">
-        <br><br>
-        <input class="contato" type="address" placeholder="(XX) X XXXX-XXXX">
-        <br><br>
-        <button>Entrar</button>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <label for="nome">{{ form.nome.label }}</label>
+            {{ form.nome(size=32) }}
 
+            <label for="telefone">{{ form.telefone.label }}</label>
+            {{ form.telefone(size=32) }}
+
+            <button type="submit" class="botao">{{ form.botao_entrar.label }}</button>
+        </form>
+        <div class="link">
+            <a href="{{ url_for('cadastrar.cadastrar') }}">Não tem uma conta? Cadastre-se</a>
+        </div>
     </div>
 </body>
 </html>

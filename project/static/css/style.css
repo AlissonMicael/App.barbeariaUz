@@ -27,6 +27,7 @@ footer {
 }
 
 .botao{
+    text-decoration: none;
     background-color: #2196F3;
     border: none;
     color: #fff;

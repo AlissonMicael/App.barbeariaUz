@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.secret_key = "comida"
 
 # Configuração da URL de conexão com o banco de dados
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/uzcabas'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:22111511@localhost/uzcaba'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -20,7 +20,7 @@ app.register_blueprint(cabelo_route, url_prefix='/cabelo')
 app.register_blueprint(barba_route, url_prefix='/barba')
 app.register_blueprint(combo_route, url_prefix='/combo')
 app.register_blueprint(barbeiro_route, url_prefix='/barbeiro')
-app.register_blueprint(cadastrar_route, url_prefix='/oi')
+app.register_blueprint(cadastrar_route, url_prefix='/cadastrar')
 
 # Cria as tabelas no banco de dados, se não existirem
 with app.app_context():
